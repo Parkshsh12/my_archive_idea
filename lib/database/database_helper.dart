@@ -8,7 +8,6 @@ class DatabaseHelper {
   Future<void> initDatabase() async {
     // 데이터베이스 경로 가져오기
     String path = join(await getDatabasesPath(), 'archive_idea.db');
-
     // 데이터베이스 열기 또는 생성
     database = await openDatabase(
       path,
@@ -23,7 +22,7 @@ class DatabaseHelper {
           content TEXT,
           priority INTEGER,
           feedback TEXT,
-          createAt INTEGER
+          createdAt INTEGER
         )
       ''');
       },
