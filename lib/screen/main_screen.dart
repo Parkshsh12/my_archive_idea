@@ -43,7 +43,12 @@ class _MainScreenState extends State<MainScreen> {
         child: ListView.builder(
           itemCount: lstIdeaInfo.length,
           itemBuilder: (context, index) {
-            return listItem(index);
+            return GestureDetector(
+              child: listItem(index),
+              onTap: () {
+                Navigator.pushNamed(context, '/detail', arguments: lstIdeaInfo[index]);
+              },
+            );
           },
         ),
       ),
@@ -144,19 +149,5 @@ class _MainScreenState extends State<MainScreen> {
       (a, b) => b.createdAt.compareTo(a.createdAt),
     );
     setState(() {});
-  }
-
-  Future setInsertIdeaInfo() async {
-    await dbHelper.initDatabase();
-    await dbHelper.insertIdeaInfo(
-      IdeaInfo(
-        title: '# 환경 보존 문제해결 앱 아이디어',
-        motive: '길 가다가 쓰레기 주우면서 알게됨',
-        content: '자세한 내용 입니다.',
-        priority: 5,
-        feedback: '피드백 사항 입니다.',
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-      ),
-    );
   }
 }
